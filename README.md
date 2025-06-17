@@ -1,3 +1,12 @@
+Name: B2B wholesale platform
+Purpose: 
+Live URL: 
+Key Features: 
+npm packs: 
+
+
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
