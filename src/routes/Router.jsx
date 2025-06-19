@@ -1,23 +1,26 @@
 import { createBrowserRouter } from "react-router";
 import MainLayout from "../layouts/MainLayout";
-// import Home from "../components/Home";
-import Login from "../components/Login";
-import Register from "../components/Register";
-// import ShareTip from "../components/ShareTip";
-// import ErrorPage from "../components/ErrorPage";
-// import BrowseTipsPage from "../components/BrowseTipsPage";
-// import PrivateRoute from "./PrivateRoute";
-// import TipDetails from "../components/TipDetails";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
+import Home from "../pages/Home";
+import PrivateRoute from "./PrivateRoute";
+import AllProducts from "../pages/AllProducts";
+import CartPage from "../pages/CartPage";
+import AddProduct from "../pages/AddProduct";
+import ProductDetails from "../pages/ProductDetails";
+import UpdateProduct from "../pages/UpdateProduct";
+import Error404 from "../pages/Error404";
+
 
 export const router = createBrowserRouter([
     {
         path: '/',
         Component: MainLayout,
         children: [
-            // {
-            //     path: '/',
-            //     Component: Home,
-            // },
+            {
+                path: '/',
+                Component: Home,
+            },
             {
                 path: '/login',
                 Component: Login,
@@ -26,40 +29,52 @@ export const router = createBrowserRouter([
                 path: '/register',
                 Component: Register,
             },
-            // {
-            //     path: '/share-tip',
-            //     Component: ShareTip,
-            // },
-            // {
-            //     path: '/tips/:id',
-            //     Component: TipDetails,
-            // },
+            {
+                path: '*',
+                Component: Error404,
+            },
+            {
+                path: '/add-products',
+                element: (
+                    <PrivateRoute>
+                        <AddProduct></AddProduct>
+                    </PrivateRoute>
+                ),
+            },
+            {
+                path: '/all-products',
+                element: (
+                    <PrivateRoute>
+                        <AllProducts></AllProducts>
+                    </PrivateRoute>
+                ),
+            },
+            {
+                path: '/cart',
+                element: (
+                    <PrivateRoute>
+                        <CartPage></CartPage>
+                    </PrivateRoute>
+                ),
+            },
+            {
+                path: '/product-details',
+                element: (
+                    <PrivateRoute>
+                        <ProductDetails></ProductDetails>
+                    </PrivateRoute>
+                ),
+            },
+            {
+                path: '/update-product',
+                element: (
+                    <PrivateRoute>
+                        <UpdateProduct></UpdateProduct>
+                    </PrivateRoute>
+                ),
+            },
+           
         ]
     },
-//     {
-//         path: '*',
-//         Component: ErrorPage,
-//     },
-//     {
-//         path: 'browse-tips',
-//         element: <PrivateRoute>
-//                     <BrowseTipsPage></BrowseTipsPage>
-                    
-//                 </PrivateRoute>
-//     },
-//     {
-//         path: 'tips/:id',
-//         element: <PrivateRoute>
-//                     <TipDetails></TipDetails>
-//                 </PrivateRoute>
-//     },
-//     {
-//         path: 'share-tip',
-//         element: <PrivateRoute>
-//                     <ShareTip></ShareTip>
-//                 </PrivateRoute>
-//     },
-    
-// 
 ]
 )

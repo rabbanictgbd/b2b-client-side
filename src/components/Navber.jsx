@@ -16,6 +16,18 @@ const Navber = () => {
         alert(error)
       });
   }
+
+  const links = (
+    <>
+      <li className='font-bold'> <Link to='/'>Home</Link></li>
+      <li className='font-bold'> <Link to='/categories'>Categories</Link></li>
+      <li className='font-bold'> <Link to='/all-products'>All Products</Link></li>
+      <li className='font-bold'> <Link to='/add-products'>Add Products</Link></li>
+      <li className='font-bold'> <Link to='/my-products'>My Products</Link></li>
+      <li className='font-bold'> <Link to='/cart'>Cart</Link></li>
+    </>
+  )
+
   return (
     <div>
       <div className="navbar bg-base-100 shadow-sm">
@@ -27,25 +39,21 @@ const Navber = () => {
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-              {/* <li><a> <Link to='/'>Home</Link></a></li>
-              <li><a> <Link to='/browse-tips'>Browse Tips</Link></a></li>
-              <li><a> <Link to='/share-tip'>Share a Garden Tip</Link></a></li>
-              <li><a> <Link to='/explore-gardeners'>Explore Gardeners</Link></a></li>
-              <li><a> <Link to='/my-tips'>My Tips</Link></a></li> */}
+              
+              {links}
 
 
             </ul>
           </div>
           {/* <img className='w-7' src={logo} alt="G Logo" /> */}
-          <a className="btn btn-ghost text-xl"> <Link to='/'> Happy Gardening</Link></a>
+          <Link className="btn btn-ghost text-xl" to='/'> B2B wholesale platform </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            {/* <li><a> <Link to='/'>Home</Link></a></li>
-            <li><a> <Link to='/browse-tips'>Browse Tips</Link></a></li>
-            <li><a> <Link to='/share-tip'>Share a Garden Tip</Link></a></li>
-            <li><a> <Link to='/explore-gardeners'>Explore Gardeners</Link></a></li>
-            <li><a> <Link to='/my-tips'>My Tips</Link></a></li> */}
+
+
+            {links}
+
 
           </ul>
         </div>
@@ -54,7 +62,7 @@ const Navber = () => {
             {authUser ? <Link onClick={handleLogout} > Logout</Link> : <Link to='/login'> Login</Link>}
           </button>
           {/* {console.log(authUser)} */}
-          
+
         </div>
       </div>
     </div>
