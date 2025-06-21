@@ -1,5 +1,5 @@
 import React, { use } from 'react';
-import { Link } from 'react-router';
+import { Link, NavLink } from 'react-router';
 // import logo from '/src/assets/g_logo.jpg'
 import { AuthContext } from '../context/AuthProvider';
 
@@ -19,12 +19,12 @@ const Navber = () => {
 
   const links = (
     <>
-      <li className='font-bold text-secondary'> <Link to='/'>Home</Link></li>
-      <li className='font-bold text-secondary'> <Link to='/categories'>Categories</Link></li>
-      <li className='font-bold text-secondary'> <Link to='/all-products'>All Products</Link></li>
-      <li className='font-bold text-secondary'> <Link to='/add-products'>Add Products</Link></li>
-      <li className='font-bold text-secondary'> <Link to='/my-products'>My Products</Link></li>
-      <li className='font-bold text-secondary'> <Link to='/cart'>Cart</Link></li>
+      <li className='font-bold text-secondary'> <NavLink to='/'>Home</NavLink></li>
+      <li className='font-bold text-secondary'> <NavLink to='/categories'>Categories</NavLink></li>
+      <li className='font-bold text-secondary'> <NavLink to='/all-products'>All Products</NavLink></li>
+      <li className='font-bold text-secondary'> <NavLink to='/add-products'>Add Products</NavLink></li>
+      <li className='font-bold text-secondary'> <NavLink to='/my-products'>My Products</NavLink></li>
+      <li className='font-bold text-secondary'> <NavLink to='/cart'>Cart</NavLink></li>
     </>
   )
 

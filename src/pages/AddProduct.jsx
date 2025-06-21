@@ -80,6 +80,7 @@ const AddProduct = () => {
                                 <option value="beauty">Beauty</option>
                                 <option value="accessories">Accessories</option>
                                 <option value="office&stationary">Office & stationary</option>
+                                <option value="others">Others</option>
                             </select> <br /></div>
                         <div>
                             <label className='font-semibold text-accent pl-4' htmlFor="description">Description</label> <br />

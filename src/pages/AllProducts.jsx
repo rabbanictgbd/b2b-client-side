@@ -60,8 +60,8 @@ const AllProduct = () => {
             <tr>
               <th className="px-4 py-2 border">SL</th>
               <th className="px-4 py-2 border">Name</th>
-              <th className="px-4 py-2 border">Brand</th>
               <th className="px-4 py-2 border">Image</th>
+              <th className="px-4 py-2 border">Brand</th>
               <th className="px-4 py-2 border">Category</th>
               <th className="px-4 py-2 border">Quantity</th>
               <th className="px-4 py-2 border">Min Sell Qty</th>
@@ -71,10 +71,9 @@ const AllProduct = () => {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {products.map((product, index) => (
-              <tr key={product._id || index} className="hover:bg-gray-50 transition">
+              <tr key={product._id || index} className="hover:bg-gray-200 ">
                 <td className="px-4 py-2 border text-center">{index + 1}</td>
                 <td className="px-4 py-2 border">{product.name}</td>
-                <td className="px-4 py-2 border">{product.brand || 'N/A'}</td>
                 <td className="px-4 py-2 border">
                   <img
                     src={product.image}
@@ -82,6 +81,7 @@ const AllProduct = () => {
                     className="w-12 h-12 object-cover rounded"
                   />
                 </td>
+                <td className="px-4 py-2 border">{product.brand || 'N/A'}</td>
                 <td className="px-4 py-2 border">{product.category}</td>
                 <td className="px-4 py-2 border text-center">{product.quantity || 0}</td>
                 <td className="px-4 py-2 border text-center">{product.minSellQty || 1}</td>
