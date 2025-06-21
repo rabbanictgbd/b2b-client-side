@@ -19,12 +19,12 @@ const Navber = () => {
 
   const links = (
     <>
-      <li className='font-bold'> <Link to='/'>Home</Link></li>
-      <li className='font-bold'> <Link to='/categories'>Categories</Link></li>
-      <li className='font-bold'> <Link to='/all-products'>All Products</Link></li>
-      <li className='font-bold'> <Link to='/add-products'>Add Products</Link></li>
-      <li className='font-bold'> <Link to='/my-products'>My Products</Link></li>
-      <li className='font-bold'> <Link to='/cart'>Cart</Link></li>
+      <li className='font-bold text-secondary'> <Link to='/'>Home</Link></li>
+      <li className='font-bold text-secondary'> <Link to='/categories'>Categories</Link></li>
+      <li className='font-bold text-secondary'> <Link to='/all-products'>All Products</Link></li>
+      <li className='font-bold text-secondary'> <Link to='/add-products'>Add Products</Link></li>
+      <li className='font-bold text-secondary'> <Link to='/my-products'>My Products</Link></li>
+      <li className='font-bold text-secondary'> <Link to='/cart'>Cart</Link></li>
     </>
   )
 
@@ -46,7 +46,7 @@ const Navber = () => {
             </ul>
           </div>
           {/* <img className='w-7' src={logo} alt="G Logo" /> */}
-          <Link className="btn btn-ghost text-xl" to='/'> B2B wholesale platform </Link>
+          <Link className="btn btn-ghost text-xl font-bold text-primary" to='/'> B2B wholesale platform </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
