@@ -22,12 +22,31 @@ const AllProduct = () => {
   };
 
   // Handle delete button
-  const handleDelete = (id) => {
-    console.log('Delete product with ID:', id);
-    //  DELETE logic here
-    //  DELETE logic here
-    //  DELETE logic here
-  };
+  const handleDelete = async (id) => {
+  const confirmDelete = window.confirm("Are you sure you want to delete this product?");
+  if (!confirmDelete) return;
+
+  try {
+    const res = await fetch(`${serverApi}/products/${id}`, {
+      method: 'DELETE',
+    });
+
+    const result = await res.json();
+    console.log(result);
+
+    if (res.ok && result.deletedCount > 0) {
+      alert("Product deleted successfully!");
+      // Update the UI without the deleted product
+      setProducts(prev => prev.filter(product => product._id !== id));
+    } else {
+      alert("Failed to delete the product.");
+    }
+  } catch (error) {
+    console.error("Delete error:", error);
+    alert("An error occurred while deleting the product.");
+  }
+};
+
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
