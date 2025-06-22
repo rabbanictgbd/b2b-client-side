@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
                 ),
             },
             {
-                path: '/cart',
+                path: '/carts/:email',
                 element: (
                     <PrivateRoute>
                         <CartPage></CartPage>
