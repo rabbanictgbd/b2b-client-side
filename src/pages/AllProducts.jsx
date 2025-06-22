@@ -15,6 +15,18 @@ const AllProduct = () => {
       .catch(err => console.error('Error:', err));
   }, [serverApi]);
 
+  // Handle Details button
+  const handleDetails = (product) => {
+    console.log('Edit product:', product);
+    navigate(`/product-details/${product._id}`);
+  };
+
+  // Handle Cart button
+  const handleCart = (product) => {
+    console.log('Edit product:', product);
+    navigate(`/Cart/${product._id}`);
+  };
+
   // Handle update button
   const handleUpdate = (product) => {
     console.log('Edit product:', product);
@@ -87,6 +99,18 @@ const AllProduct = () => {
                   <td className="px-4 py-2 border text-center">{product.minSellQty || 1}</td>
                   <td className="px-4 py-2 border text-center">{product.rating || 'N/A'}</td>
                   <td className="px-4 py-2 border text-center space-x-2">
+                    <button
+                      onClick={() => handleCart(product)}
+                      className="bg-primary hover:bg-blue-600 text-white text-xs px-3 py-1 rounded"
+                    >
+                      Add to Cart
+                    </button>
+                    <button
+                      onClick={() => handleDetails(product)}
+                      className="bg-secondary hover:bg-blue-600 text-white text-xs px-3 py-1 rounded"
+                    >
+                      Details
+                    </button>
                     <button
                       onClick={() => handleUpdate(product)}
                       className="bg-accent hover:bg-blue-600 text-white text-xs px-3 py-1 rounded"

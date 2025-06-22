@@ -91,6 +91,9 @@ const AddProduct = () => {
                         <div>
                             <label className='font-semibold text-accent pl-4' htmlFor="rating">Rating</label> <br />
                             <input name='rating' className='border border-accent rounded-2xl p-1 m-1 w-full' id='rating' type="text" placeholder='Rating' /> <br /></div>
+                        <div>
+                            <label className='font-semibold text-accent pl-4' htmlFor="content">Product Content</label> <br />
+                            <input name='content' className='border border-accent rounded-2xl p-1 m-1 w-full' id='content' type="text" placeholder='Product Content' /> <br /></div>
 
                        
                     </div>

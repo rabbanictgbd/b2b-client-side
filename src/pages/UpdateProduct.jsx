@@ -194,6 +194,19 @@ const UpdateProduct = () => {
               placeholder="Rating"
             />
           </div>
+          <div>
+            <label className="font-semibold text-accent pl-4" htmlFor="content">
+              Product Content
+            </label>
+            <input
+              defaultValue={product.content}
+              name="content"
+              className="border border-accent rounded-2xl p-1 m-1 w-full"
+              id="content"
+              type="text"
+              placeholder="Product Content"
+            />
+          </div>
         </div>
         <button type="submit" className="text-center btn btn-primary rounded-3xl m-1 w-full">
           Update
