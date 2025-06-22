@@ -12,18 +12,19 @@ const AddProduct = () => {
         const form = e.target;
         const formData = new FormData(form)
         const formDataEntries = Object.fromEntries(formData.entries())
-        // console.log(formDataEntries)
+        console.log(formDataEntries)
 
         fetch(`${serverApi}/products`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(formDataEntries)
+            body: JSON.stringify(formDataEntries),
+           
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data)
+                console.log(data)
                 if (data.insertedId) {
                     Swal.fire({
                         position: "top",

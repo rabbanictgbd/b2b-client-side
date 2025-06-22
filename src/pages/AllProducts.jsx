@@ -1,9 +1,9 @@
-import React, { Suspense, useContext, useEffect, useState } from 'react';
+import React, { Suspense, use, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 
 const AllProduct = () => {
-  const { serverApi } = useContext(AuthContext);
+  const { serverApi , authUser} = useContext(AuthContext);
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
@@ -22,10 +22,53 @@ const AllProduct = () => {
   };
 
   // Handle Cart button
-  const handleCart = (product) => {
-    console.log('Edit product:', product);
-    navigate(`/Cart/${product._id}`);
-  };
+  const handleAddToCart = (product) => {
+  if (!authUser || !authUser.email) {
+    alert("You must be logged in to add to cart.");
+    return;
+  }
+
+  const cartItem = {
+  productId: product._id,
+  name: product.name,
+  image: product.image,
+  category: product.category,
+  brand: product.brand,
+  price: product.price,
+  minSellQty: product.minSellQty,
+  quantity: product.quantity,
+  rating: product.rating,
+  description: product.description,
+  userEmail: authUser.email,
+  buyDate: new Date().toISOString(),
+  buyQuantity: product.minSellQty || 1,
+};
+
+
+  console.log('Cart Item:', cartItem);
+
+  fetch(`${serverApi}/carts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(cartItem),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Server Response:", data);
+      if (data.insertedId || data.success) {
+        alert("✅ Added to cart successfully!");
+      } else {
+        alert("⚠️ Could not add to cart.");
+      }
+    })
+    .catch((err) => {
+      console.error("Add to cart error:", err);
+      alert("❌ Failed to add to cart.");
+    });
+};
+
 
   // Handle update button
   const handleUpdate = (product) => {
@@ -77,6 +120,7 @@ const AllProduct = () => {
                 <th className="px-4 py-2 border">Category</th>
                 <th className="px-4 py-2 border">Quantity</th>
                 <th className="px-4 py-2 border">Min Sell Qty</th>
+                <th className="px-4 py-2 border">Price</th>
                 <th className="px-4 py-2 border">Rating</th>
                 <th className="px-4 py-2 border">Action</th>
               </tr>
@@ -97,10 +141,11 @@ const AllProduct = () => {
                   <td className="px-4 py-2 border">{product.category}</td>
                   <td className="px-4 py-2 border text-center">{product.quantity || 0}</td>
                   <td className="px-4 py-2 border text-center">{product.minSellQty || 1}</td>
+                  <td className="px-4 py-2 border text-center">{product.price || 'N/A'}</td>
                   <td className="px-4 py-2 border text-center">{product.rating || 'N/A'}</td>
                   <td className="px-4 py-2 border text-center space-x-2">
                     <button
-                      onClick={() => handleCart(product)}
+                      onClick={() => handleAddToCart(product, authUser)}
                       className="bg-primary hover:bg-blue-600 text-white text-xs px-3 py-1 rounded"
                     >
                       Add to Cart
