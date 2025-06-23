@@ -9,7 +9,7 @@ const Footer = () => {
        
         <div>
           <h3 className="text-lg font-semibold mb-3">Contact Us</h3>
-          <p>Email: contact@gardeninglife.com</p>
+          <p>Email: contact@b2b.com</p>
           <p>Phone: +880-123-456-7890</p>
           <p>Address: Chattogram, Bangladesh</p>
         </div>
@@ -46,7 +46,7 @@ const Footer = () => {
 
     
       <div className="mt-8 text-sm text-center text-green-300">
-        © {new Date().getFullYear()} Gardening Life. All rights reserved.
+        © {new Date().getFullYear()} b2b. All rights reserved.
       </div>
     </footer>
   );

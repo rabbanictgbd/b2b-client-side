@@ -63,12 +63,13 @@ const Navber = () => {
         </div>
         {/* <div className="navbar-end">
           <button type='submit' className=" ">
-            {authUser ? <Link onClick={handleLogout} > <img  className=`w-12 h-12 rounded-full hover:${authUser.displapName}` src={authUser.photoURL} alt="U Photo" /></Link> : <Link to='/login'> Login</Link>}
+            {authUser ? <Link onClick={handleLogout} > <img  className=`w-12 h-12 rounded-full hover:${authUser.displayName}` src={authUser.photoURL} alt="U Photo" /></Link> : <Link to='/login'> Login</Link>}
           </button>
          { console.log(authUser)}
         </div> */}
+        
         {authUser ? (
-  <div className="relative group">
+  <div className="relative group navbar-end">
     <img
       src={authUser.photoURL}
       alt={authUser.displayName || "User"}
@@ -87,7 +88,7 @@ const Navber = () => {
     </div>
   </div>
 ) : (
-  <Link to="/login" className="btn btn-primary">Login</Link>
+  <div className='navbar-end'> <Link to="/login" className="btn btn-primary">Login</Link> </div>
 )}
 
       </div>
