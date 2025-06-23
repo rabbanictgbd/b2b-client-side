@@ -5,9 +5,9 @@ import { AuthContext } from '../context/AuthProvider';
 const Login = () => {
     const { authUser, login, googleLogin } = use(AuthContext);
     // console.log(authUser)
-    const navigate= useNavigate()
-    const location=useLocation()
-    const from= location?.state?.from?.pathname 
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location?.state?.from?.pathname
 
     const handleLogin = (e) => {
         e.preventDefault()
@@ -17,7 +17,7 @@ const Login = () => {
         login(email, password)
             .then(() => {
                 alert('Signed in successful.')
-                navigate(from, {replace: true})
+                navigate(from, { replace: true })
             }).catch((error) => {
                 alert(error)
             });
@@ -56,9 +56,9 @@ const Login = () => {
                                 <button type='submit' className="btn btn-primary mt-4"> Login</button>
                             </fieldset>
                             <div className="divider">OR</div>
-                        <button type='button' className="btn btn-outline btn-secondary" onClick={handleGoogleLogin}>
-                            Login with Google
-                        </button>
+                            <button type='button' className="btn btn-outline btn-secondary" onClick={handleGoogleLogin}>
+                                Login with Google
+                            </button>
                             <h3>Don't have an account? <Link className='text-blue-500' to='/register' >Register</Link></h3>
                         </form>
                     </div>

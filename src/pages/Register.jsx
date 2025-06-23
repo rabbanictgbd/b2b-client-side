@@ -1,9 +1,12 @@
 import React, { use } from 'react';
-import { Link } from 'react-router';
+import { Link, Navigate } from 'react-router';
 import { AuthContext } from '../context/AuthProvider';
+import { updateProfile } from 'firebase/auth';
+import Swal from 'sweetalert2';
+
 
 const Register = () => {
-    const { createUser, setAuthUser } = use(AuthContext)
+    const { createUser, setAuthUser, googleLogin } = use(AuthContext)
     const handleRegister = (e) => {
         e.preventDefault()
         // console.log(e.target)
@@ -13,32 +16,47 @@ const Register = () => {
         const password = e.target.password.value
         // console.log({ name, email, photo, password })
         const minLength = 8;
-    const uppercasePattern = /[A-Z]/;
-    const numberPattern = /[0-9]/;
-    const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
+        const uppercasePattern = /[A-Z]/;
+        const numberPattern = /[0-9]/;
+        const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
 
-    if (password.length < minLength) {
-        alert("Password must be at least 8 characters long.");
-        return;
-    }
-    if (!uppercasePattern.test(password)) {
-        alert("Password must contain at least one uppercase letter.");
-        return;
-    }
-    if (!numberPattern.test(password)) {
-        alert("Password must contain at least one number.");
-        return;
-    }
-    if (!specialCharPattern.test(password)) {
-        alert("Password must contain at least one special character.");
-        return;
-    }
+        if (password.length < minLength) {
+            alert("Password must be at least 8 characters long.");
+            return;
+        }
+        if (!uppercasePattern.test(password)) {
+            alert("Password must contain at least one uppercase letter.");
+            return;
+        }
+        if (!numberPattern.test(password)) {
+            alert("Password must contain at least one number.");
+            return;
+        }
+        if (!specialCharPattern.test(password)) {
+            alert("Password must contain at least one special character.");
+            return;
+        }
 
         createUser(email, password)
             .then(result => {
                 const user = result.user;
                 // console.log(user)
-                setAuthUser(user)
+                updateProfile(user, {
+                    displayName: name,
+                    photoURL: photo,
+                })
+                .then(()=>{
+                    setAuthUser({...user, displayName: name, photoURL: photo})
+                    Swal.fire({
+                                            position: "top",
+                                            icon: "success",
+                                            title: "Your profile updated successfully",
+                                            showConfirmButton: false,
+                                            timer: 2000
+                                        });
+                    
+
+                })
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -46,8 +64,18 @@ const Register = () => {
                 alert(errorCode, errorMessage)
             });
 
-
     }
+
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(() => {
+                alert('Google sign-in successful.');
+                Navigate('/');
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
+    };
     return (
         <div>
             <div className="hero bg-base-200 min-h-screen">
@@ -69,7 +97,11 @@ const Register = () => {
                                 <input required name='photo' type="text" className="input" placeholder="photo url" />
                                 <label className="label">Password</label>
                                 <input required name='password' type="password" className="input" placeholder="Password" />
-                                <button type='submit' className="btn btn-accent mt-4">Register</button>
+                                <button type='submit' className="btn btn-primary mt-4">Register</button>
+                                <div className="divider">OR</div>
+                                <button type='button' className="btn btn-outline btn-secondary" onClick={handleGoogleLogin}>
+                                    Login with Google
+                                </button>
                                 <h3>Already have an account? <Link className='text-blue-500' to='/login' >Login</Link></h3>
                             </fieldset>
                         </form>

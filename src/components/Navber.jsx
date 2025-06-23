@@ -62,9 +62,11 @@ const Navber = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <button type='submit' className="btn btn-primary mt-4">
-            {authUser ? <Link onClick={handleLogout} > Logout</Link> : <Link to='/login'> Login</Link>}
+          <button type='submit' className=" ">
+            {authUser ? <Link onClick={handleLogout} > <img className='w-12 h-12 rounded-full' src={authUser.photoURL} alt="U Photo" /></Link> : <Link to='/login'> Login</Link>}
           </button>
+         { console.log(authUser)}
+          
           {/* {console.log(authUser)} */}
 
         </div>
