@@ -61,15 +61,35 @@ const Navber = () => {
 
           </ul>
         </div>
-        <div className="navbar-end">
+        {/* <div className="navbar-end">
           <button type='submit' className=" ">
-            {authUser ? <Link onClick={handleLogout} > <img className='w-12 h-12 rounded-full' src={authUser.photoURL} alt="U Photo" /></Link> : <Link to='/login'> Login</Link>}
+            {authUser ? <Link onClick={handleLogout} > <img  className=`w-12 h-12 rounded-full hover:${authUser.displapName}` src={authUser.photoURL} alt="U Photo" /></Link> : <Link to='/login'> Login</Link>}
           </button>
          { console.log(authUser)}
-          
-          {/* {console.log(authUser)} */}
+        </div> */}
+        {authUser ? (
+  <div className="relative group">
+    <img
+      src={authUser.photoURL}
+      alt={authUser.displayName || "User"}
+      title={authUser.displayName || "User"}
+      className="w-12 h-12 rounded-full cursor-pointer transition-transform hover:scale-105"
+    />
+    {/* Hover dropdown */}
+    <div className="absolute right-0 bg-white shadow-lg rounded-lg p-3 z-50 hidden group-hover:flex flex-col min-w-[150px]">
+      <p className="text-sm font-semibold text-gray-700">{authUser.displayName}</p>
+      <button
+        onClick={handleLogout}
+        className="text-red-600 hover:underline mt-2 text-sm text-left"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+) : (
+  <Link to="/login" className="btn btn-primary">Login</Link>
+)}
 
-        </div>
       </div>
     </div>
   );
