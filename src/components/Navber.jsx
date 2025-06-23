@@ -19,14 +19,16 @@ const Navber = () => {
 
   const links = (
     <>
-      <li className='font-bold text-secondary'> <NavLink to='/'>Home</NavLink></li>
-      <li className='font-bold text-secondary'> <NavLink to='/categories'>Categories</NavLink></li>
-      <li className='font-bold text-secondary'> <NavLink to='/all-products'>All Products</NavLink></li>
-      <li className='font-bold text-secondary'> <NavLink to='/add-products'>Add Products</NavLink></li>
-      <li className='font-bold text-secondary'> <NavLink to='/my-products'>My Products</NavLink></li>
+    <div className="flex gap-3">
+       <NavLink className={({isActive})=> isActive? 'font-bold text-white bg-accent border border-accent p-1 rounded-md':'font-bold text-secondary' } to='/'>Home</NavLink>
+       <NavLink className={({isActive})=> isActive? 'font-bold text-white bg-accent border border-accent p-1 rounded-md':'font-bold text-secondary' } to='/categories'>Categories</NavLink>
+       <NavLink className={({isActive})=> isActive? 'font-bold text-white bg-accent border border-accent p-1 rounded-md':'font-bold text-secondary' } to='/all-products'>All Products</NavLink>
+       <NavLink className={({isActive})=> isActive? 'font-bold text-white bg-accent border border-accent p-1 rounded-md':'font-bold text-secondary' } to='/add-products'>Add Products</NavLink>
+       <NavLink className={({isActive})=> isActive? 'font-bold text-white bg-accent border border-accent p-1 rounded-md':'font-bold text-secondary' } to='/my-products'>My Products</NavLink>
     {/* {authUser && authUser.email &&(   */}
-      <li className='font-bold text-secondary'> <NavLink to= {`/carts/${authUser?.email}`} >Cart</NavLink></li>
+       <NavLink className={({isActive})=> isActive? 'font-bold text-white bg-accent border border-accent p-1 rounded-md':'font-bold text-secondary' } to= {`/carts/${authUser?.email}`} >Cart</NavLink>
       {/* // )} */}
+      </div>
     </>
   )
 
