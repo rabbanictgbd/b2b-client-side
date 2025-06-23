@@ -1,9 +1,31 @@
 Name: B2B wholesale platform
-Purpose: 
-Live URL: 
-Key Features: 
-npm packs: 
 
+Purpose: Using the website can handle business faster by getting realtime stock & other facilities.
+
+Live URL: https://b11a11-client-side-rabbanictg.web.app/
+
+Key Features: 
+*Product list
+*Available Product
+*Cart data
+*Add new product
+*Update product
+*Authentication by firebase etc
+
+npm packs: 
+        dotenv
+        @tailwindcss/vite
+        firebase
+        motion
+        react
+        react-dom
+        react-icons
+        react-router
+        react-router-dom
+        react-slick
+        slick-carousel
+        sweetalert2
+        tailwindcss
 
 
 
