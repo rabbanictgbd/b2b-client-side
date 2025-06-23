@@ -24,7 +24,9 @@ const Navber = () => {
       <li className='font-bold text-secondary'> <NavLink to='/all-products'>All Products</NavLink></li>
       <li className='font-bold text-secondary'> <NavLink to='/add-products'>Add Products</NavLink></li>
       <li className='font-bold text-secondary'> <NavLink to='/my-products'>My Products</NavLink></li>
-    {authUser && authUser.email &&(  <li className='font-bold text-secondary'> <NavLink to= {`/carts/${authUser.email}`} >Cart</NavLink></li>)}
+    {/* {authUser && authUser.email &&(   */}
+      <li className='font-bold text-secondary'> <NavLink to= {`/carts/${authUser?.email}`} >Cart</NavLink></li>
+      {/* // )} */}
     </>
   )
 
