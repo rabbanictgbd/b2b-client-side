@@ -10,6 +10,9 @@ import AddProduct from "../pages/AddProduct";
 import ProductDetails from "../pages/ProductDetails";
 import UpdateProduct from "../pages/UpdateProduct";
 import Error404 from "../pages/Error404";
+import ProductCategories from "../components/ProductCategories";
+import AllCategories from "../pages/AllCategories";
+import MyProducts from "../pages/MyProducts";
 
 
 export const router = createBrowserRouter([
@@ -70,6 +73,30 @@ export const router = createBrowserRouter([
                 element: (
                     <PrivateRoute>
                         <UpdateProduct></UpdateProduct>
+                    </PrivateRoute>
+                ),
+            },
+            {
+                path: '/categories/:id',
+                element: (
+                    <PrivateRoute>
+                        <ProductCategories></ProductCategories>
+                    </PrivateRoute>
+                ),
+            },
+            {
+                path: '/categories',
+                element: (
+                    <PrivateRoute>
+                        <AllCategories></AllCategories>
+                    </PrivateRoute>
+                ),
+            },
+            {
+                path: '/my-products',
+                element: (
+                    <PrivateRoute>
+                        <MyProducts></MyProducts>
                     </PrivateRoute>
                 ),
             },

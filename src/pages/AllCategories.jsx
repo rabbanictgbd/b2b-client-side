@@ -2,25 +2,25 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 import { useParams } from 'react-router-dom'; // 🛠 Corrected from 'react-router' to 'react-router-dom'
 
-const ProductCategories = () => {
+const AllCategories = () => {
   const { id } = useParams();
   const { serverApi } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`${serverApi}/categories/${id}`)
+    fetch(`${serverApi}/categories`)
       .then(res => res.json())
       .then(data => {
         setProducts(data);
         console.log(data);
       })
       .catch(error => console.error('Failed to fetch category products:', error));
-  }, [serverApi, id]);
+  }, [serverApi,]);
   
 
   return (
     <div className="p-4">
-      <h2 className="text-xl font-semibold mb-4">Products in Category: {id}</h2>
+      <h2 className="text-xl font-semibold mb-4">Products in Category: All {id}</h2>
       {products.length === 0 ? (
         <p>No products found in this category.</p>
       ) : (
@@ -41,4 +41,4 @@ const ProductCategories = () => {
   );
 };
 
-export default ProductCategories;
+export default AllCategories;
