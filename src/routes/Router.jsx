@@ -93,7 +93,7 @@ export const router = createBrowserRouter([
                 ),
             },
             {
-                path: '/my-products',
+                path: '/my-products/:email',
                 element: (
                     <PrivateRoute>
                         <MyProducts></MyProducts>

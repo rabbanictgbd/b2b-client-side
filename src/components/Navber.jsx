@@ -24,7 +24,7 @@ const Navber = () => {
        <NavLink className={({isActive})=> isActive? 'font-bold text-white bg-accent border border-accent p-1 rounded-md':'font-bold text-secondary' } to='/categories'>Categories</NavLink>
        <NavLink className={({isActive})=> isActive? 'font-bold text-white bg-accent border border-accent p-1 rounded-md':'font-bold text-secondary' } to='/all-products'>All Products</NavLink>
        <NavLink className={({isActive})=> isActive? 'font-bold text-white bg-accent border border-accent p-1 rounded-md':'font-bold text-secondary' } to='/add-products'>Add Products</NavLink>
-       <NavLink className={({isActive})=> isActive? 'font-bold text-white bg-accent border border-accent p-1 rounded-md':'font-bold text-secondary' } to='/my-products'>My Products</NavLink>
+       <NavLink className={({isActive})=> isActive? 'font-bold text-white bg-accent border border-accent p-1 rounded-md':'font-bold text-secondary' } to={`/my-products/${authUser?.email}`}>My Products</NavLink>
     {/* {authUser && authUser.email &&(   */}
        <NavLink className={({isActive})=> isActive? 'font-bold text-white bg-accent border border-accent p-1 rounded-md':'font-bold text-secondary' } to= {`/carts/${authUser?.email}`} >Cart</NavLink>
       {/* // )} */}

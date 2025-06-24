@@ -5,7 +5,7 @@ import { use } from "react";
 
 const AddProduct = () => {
 
-    const { serverApi } = use(AuthContext)
+    const { serverApi, authUser } = use(AuthContext)
 
     const handleAdd = (e) => {
         e.preventDefault()
@@ -13,6 +13,9 @@ const AddProduct = () => {
         const formData = new FormData(form)
         const formDataEntries = Object.fromEntries(formData.entries())
         console.log(formDataEntries)
+        // const addData=[...formDataEntries, authUser.email]
+        // console.log(addData)
+        formDataEntries.email = authUser?.email 
 
         fetch(`${serverApi}/products`, {
             method: 'POST',

@@ -1,9 +1,10 @@
 import React, { Suspense, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProvider';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const AllProduct = () => {
   const { serverApi , authUser} = useContext(AuthContext);
+  
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 

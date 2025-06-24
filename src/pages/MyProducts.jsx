@@ -1,19 +1,20 @@
 import React, { Suspense, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProvider';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const MyProducts = () => {
   const { serverApi , authUser} = useContext(AuthContext);
+  const {email}=useParams()
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
   // Fetch products on component mount
   useEffect(() => {
-    fetch(`${serverApi}/products`)
+    fetch(`${serverApi}/my-products/${email}`)
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(err => console.error('Error:', err));
-  }, [serverApi]);
+  }, [serverApi, email]);
 
   // Handle Details button
   const handleDetails = (product) => {
