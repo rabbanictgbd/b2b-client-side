@@ -17,7 +17,8 @@ const UpdateProduct = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
-        setProduct(data)})
+        setProduct(data)
+      })
       .catch((err) => console.error("Failed to fetch product:", err));
   }, [id, serverApi]);
 
@@ -26,6 +27,11 @@ const UpdateProduct = () => {
     const form = e.target;
     const formData = new FormData(form);
     const updatedProduct = Object.fromEntries(formData.entries());
+
+    updatedProduct.quantity = Number(updatedProduct.quantity);
+    updatedProduct.minSellQty = Number(updatedProduct.minSellQty);
+    updatedProduct.price = Number(updatedProduct.price);
+    updatedProduct.rating = Number(updatedProduct.rating);
 
     fetch(`${serverApi}/products/${id}`, {
       method: "PUT",
@@ -36,24 +42,24 @@ const UpdateProduct = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-  if (data.modifiedCount > 0) {
-    Swal.fire({
-      position: "top",
-      icon: "success",
-      title: "Product updated successfully",
-      showConfirmButton: false,
-      timer: 2000,
-    });
-    navigate("/all-products");
-  } else {
-    Swal.fire({
-      icon: "info",
-      title: "No changes made",
-      text: "You didn't modify any fields.",
-    });
-  }
-  
-});
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            position: "top",
+            icon: "success",
+            title: "Product updated successfully",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          navigate("/all-products");
+        } else {
+          Swal.fire({
+            icon: "info",
+            title: "No changes made",
+            text: "You didn't modify any fields.",
+          });
+        }
+
+      });
 
   };
 
