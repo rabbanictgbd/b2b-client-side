@@ -2,12 +2,23 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 import { useParams } from 'react-router-dom'; // should be 'react-router-dom'
 import Swal from 'sweetalert2';
+import { motion, MotionConfig } from 'framer-motion';
+import MotionTest from '../components/MotionTest';
 
 const CartPage = () => {
     const { serverApi } = useContext(AuthContext);
     const { email } = useParams();
     const [carts, setCarts] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    <motion.div
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="p-4 bg-blue-200 rounded-lg shadow"
+    >
+      <h1 className="text-xl font-bold">Hello Animation!</h1>
+    </motion.div>
 
     const handleRemove = (item) => {
         console.log("remove clicked", item._id);
@@ -51,6 +62,7 @@ const CartPage = () => {
     if (loading) return <p className="text-center mt-4">Loading cart...</p>;
 
     return (
+        <MotionTest>
         <div className="p-6">
             <h1 className="text-xl font-bold mb-4">🛒 Cart Page</h1>
             <p><strong>Total items:</strong> {carts.length}</p>
@@ -76,11 +88,14 @@ const CartPage = () => {
                                 Remove
                             </button>
                         </div>
+                        
                     ))}
                 </div>
+                
             )}
 
         </div>
+        </MotionTest>
     );
 };
 
