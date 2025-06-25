@@ -66,7 +66,7 @@ const ProductDetails = () => {
                     title: "Purchase successful!",
                 });
                 setIsModalOpen(false);
-                navigate(`/carts/${authUser.email}`); // redirect to cart page
+                // navigate(`/carts/${authUser.email}`); // redirect to cart page
             })
             .catch((err) => {
                 console.error(err);

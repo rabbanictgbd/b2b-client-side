@@ -9,15 +9,15 @@ const CartPage = () => {
     const [carts, setCarts] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const handleRemove = (id) => {
-        console.log("remove clicked", id);
-        fetch(`${serverApi}/carts/${id}`, {
+    const handleRemove = (item) => {
+        console.log("remove clicked", item._id);
+        fetch(`${serverApi}/carts/${item._id}`, {
             method: "DELETE"
         })
             .then(res => res.json())
             .then(data => {
                 if (data.deletedCount > 0) {
-                    setCarts(prev => prev.filter(item => item._id !== id));
+                    setCarts(prev => prev.filter(cartItem => cartItem._id !== item._id));
                     Swal.fire({
                         icon: 'success',
                         title: 'Removed from cart',
@@ -27,7 +27,11 @@ const CartPage = () => {
                 }
             })
             .catch(err => console.error("Failed to delete item:", err));
-            
+           return fetch(`${serverApi}/products/quantity/${item.productId}`, {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ decBy: -item.buyQuantity }),
+                    });
     };
     useEffect(() => {
         if (!email) return;
@@ -68,7 +72,7 @@ const CartPage = () => {
                             <p><strong>Category:</strong> {item.category}</p>
                             <p><strong>Buy Date:</strong> {new Date(item.buyDate).toLocaleDateString()}</p>
                             <p><strong>Buy Quantity:</strong> {item.buyQuantity}</p>
-                            <button onClick={() => handleRemove(item._id)} className="mt-2 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">
+                            <button onClick={() => handleRemove(item)} className="mt-2 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">
                                 Remove
                             </button>
                         </div>
