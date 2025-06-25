@@ -1,12 +1,14 @@
 import React from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // Import images from src/assets
 import banner1 from "../assets/banner_1.jpg";
-import banner2 from "../assets/banner_2.jpg"; 
-import banner3 from "../assets/banner_3.jpg"; 
+import banner2 from "../assets/banner_2.jpg";
+import banner3 from "../assets/banner_3.jpg";
+// import product-category from "./
+// CategorySection"
 
 const Banner = () => {
   const settings = {
@@ -16,7 +18,7 @@ const Banner = () => {
     speed: 5000,
     autoplaySpeed: 6000,
     slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToScroll: 1,
   };
 
   const eventSlides = [
@@ -25,23 +27,30 @@ const Banner = () => {
       title: "",
       description: "",
       image: banner1,
-      buttonText: "Get offer"
+      buttonText: "Get offer",
     },
     {
       id: 2,
       title: "",
       description: "",
       image: banner2,
-      buttonText: "Get offer"
+      buttonText: "Get offer",
     },
     {
       id: 3,
       title: "",
       description: "",
       image: banner3,
-      buttonText: "Get offer"
-    }
+      buttonText: "Get offer",
+    },
   ];
+
+  const scrollToCategory = () => {
+    const section = document.getElementById("product-category");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="w-full max-w-6xl mx-auto mt-8">
@@ -51,13 +60,16 @@ const Banner = () => {
             <div
               className="h-[500px] flex items-center justify-center text-white text-center bg-cover bg-center"
               style={{
-                backgroundImage: `url(${event.image})`
+                backgroundImage: `url(${event.image})`,
               }}
             >
               <div className="bg-green bg-opacity-60 p-8 rounded-xl max-w-xl mx-auto">
                 <h2 className="text-3xl font-bold mb-4">{event.title}</h2>
                 <p className="mb-6">{event.description}</p>
-                <button className="bg-green-500 hover:bg-green-600 px-6 py-2 rounded-full">
+                <button
+                  onClick={scrollToCategory}
+                  className="bg-green-500 hover:bg-green-600 px-6 py-2 rounded-full"
+                >
                   {event.buttonText}
                 </button>
               </div>

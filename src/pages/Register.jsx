@@ -21,7 +21,7 @@ const Register = () => {
         const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
 
         if (password.length < minLength) {
-            alert("Password must be at least 8 characters long.");
+            alert("Password must be at least 6 characters long.");
             return;
         }
         if (!uppercasePattern.test(password)) {

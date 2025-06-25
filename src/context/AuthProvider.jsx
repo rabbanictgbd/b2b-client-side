@@ -14,8 +14,8 @@ const AuthProvider = ({ children }) => {
     const login = (email, password) => signInWithEmailAndPassword(auth, email, password)
     const googleLogin = () => signInWithPopup(auth, googleProvider)
 
-const serverApi= 'http://localhost:3000';
-// const serverApi= 'https://b11a11-server-side-rabbanictgbd.vercel.app';
+// const serverApi= 'http://localhost:3000';
+const serverApi= 'https://b11a11-server-side-rabbanictgbd.vercel.app';
 
 
     const logout = () => {

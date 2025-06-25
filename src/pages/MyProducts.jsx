@@ -159,12 +159,12 @@ const MyProducts = () => {
                   <td className="px-4 py-2 border text-center">{product.price || 'N/A'}</td>
                   <td className="px-4 py-2 border text-center">{product.rating || 'N/A'}</td>
                   <td className="px-4 py-2 border text-center space-x-2">
-                    <button
+                    {/* <button
                       onClick={() => handleAddToCart(product, authUser)}
                       className="bg-primary hover:bg-blue-600 text-white text-xs px-3 py-1 rounded"
                     >
                       Add to Cart
-                    </button>
+                    </button> */}
                     <button
                       onClick={() => handleDetails(product)}
                       className="bg-secondary hover:bg-blue-600 text-white text-xs px-3 py-1 rounded"

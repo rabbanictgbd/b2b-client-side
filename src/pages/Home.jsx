@@ -12,7 +12,7 @@ const Home = () => {
                 <Banner></Banner>
             <MotionTest></MotionTest>
             </div>
-            <div>
+            <div id='product-category'>
                 <CategorySection></CategorySection>
             </div>
             <div>
