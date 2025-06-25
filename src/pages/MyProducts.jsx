@@ -1,6 +1,7 @@
 import React, { Suspense, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const MyProducts = () => {
   const { serverApi , authUser} = useContext(AuthContext);
@@ -91,7 +92,13 @@ const MyProducts = () => {
       console.log(result);
 
       if (res.ok && result.deletedCount > 0) {
-        alert("Product deleted successfully!");
+        Swal.fire({
+                                position: "top",
+                                icon: "success",
+                                title: "Product deleted successfully!",
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
         // Update the UI without the deleted product
         setProducts(prev => prev.filter(product => product._id !== id));
       } else {
@@ -132,11 +139,18 @@ const MyProducts = () => {
                   <td className="px-4 py-2 border text-center">{index + 1}</td>
                   <td className="px-4 py-2 border">{product.name}</td>
                   <td className="px-4 py-2 border">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-12 h-12 object-cover rounded"
-                    />
+                    {product.image ? (
+
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-12 h-12 object-cover rounded"
+                      />
+                    ) : (
+                      <div className="w-12 h-12 bg-gray-200 text-xs text-center flex items-center justify-center rounded">
+                        No Image
+                      </div>
+                    )}
                   </td>
                   <td className="px-4 py-2 border">{product.brand || 'N/A'}</td>
                   <td className="px-4 py-2 border">{product.category}</td>

@@ -1,11 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProvider';
-import { useParams } from 'react-router-dom'; // 🛠 Corrected from 'react-router' to 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'; 
 
 const ProductCategories = () => {
   const { id } = useParams();
   const { serverApi } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate()
+
+   // Handle Details button
+  const handleDetails = (product) => {
+    console.log('Edit product:', product);
+    navigate(`/product-details/${product._id}`);
+  };
 
   useEffect(() => {
     fetch(`${serverApi}/categories/${id}`)
@@ -33,9 +40,16 @@ const ProductCategories = () => {
               <p>Category:{product.category}</p>
               <p>Price: ${product.price}</p>
               <p>Rating: {product.rating}</p>
+              <button
+                      onClick={() => handleDetails(product)}
+                      className="bg-secondary hover:bg-blue-600 text-white text-xs px-3 py-1 rounded"
+                    >
+                      Details
+                    </button>
             </li>
           ))}
         </ul>
+        
       )}
     </div>
   );

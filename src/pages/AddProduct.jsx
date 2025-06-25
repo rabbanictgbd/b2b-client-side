@@ -12,10 +12,18 @@ const AddProduct = () => {
         const form = e.target;
         const formData = new FormData(form)
         const formDataEntries = Object.fromEntries(formData.entries())
+
         console.log(formDataEntries)
         // const addData=[...formDataEntries, authUser.email]
-        // console.log(addData)
-        formDataEntries.email = authUser?.email 
+        // console.log(addData)    
+
+        formDataEntries.email = authUser?.email;
+        // ✅ Convert string inputs to numbers
+        formDataEntries.quantity = Number(formDataEntries.quantity);
+        formDataEntries.minSellQty = Number(formDataEntries.minSellQty);
+        formDataEntries.price = Number(formDataEntries.price);
+        formDataEntries.rating = Number(formDataEntries.rating);
+
 
         fetch(`${serverApi}/products`, {
             method: 'POST',
@@ -23,7 +31,7 @@ const AddProduct = () => {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(formDataEntries),
-           
+
         })
             .then(res => res.json())
             .then(data => {
@@ -57,13 +65,13 @@ const AddProduct = () => {
                             <input name='image' className='border border-accent rounded-2xl p-1 m-1 w-full' id='image' type="link" placeholder='Image url' /> <br /></div>
                         <div>
                             <label className='font-semibold text-accent pl-4' htmlFor="name">Product Name</label> <br />
-                            <input name='name' className='border border-accent rounded-2xl p-1 m-1 w-full' id='name' type="text" placeholder='Name' /> <br /></div>
+                            <input name='name' required className='border border-accent rounded-2xl p-1 m-1 w-full' id='name' type="text" placeholder='Name' /> <br /></div>
                         <div>
                             <label className='font-semibold text-accent pl-4' htmlFor="quantity">Quantity</label> <br />
-                            <input name='quantity' className='border border-accent rounded-2xl p-1 m-1 w-full' id='quantity' type="number" placeholder='Quantity' /> <br /></div>
+                            <input name='quantity' required className='border border-accent rounded-2xl p-1 m-1 w-full' id='quantity' type="number" placeholder='Quantity' /> <br /></div>
                         <div>
                             <label className='font-semibold text-accent pl-4' htmlFor="minSellQty">Min sell quantity</label> <br />
-                            <input name='minSellQty' className='border border-accent rounded-2xl p-1 m-1 w-full' id='minSellQty' type="number" placeholder='Min sell quantity' /> <br /></div>
+                            <input name='minSellQty' required className='border border-accent rounded-2xl p-1 m-1 w-full' id='minSellQty' type="number" placeholder='Min sell quantity' /> <br /></div>
                         <div>
                             <label className='font-semibold text-accent pl-4' htmlFor="brand">Brand name</label> <br />
                             <input name='brand' className='border border-accent rounded-2xl p-1 m-1 w-full' id='brand' type="text" placeholder='Brand name' /> <br /></div>
@@ -91,7 +99,7 @@ const AddProduct = () => {
                             <input name='description' className='border border-accent rounded-2xl p-1 m-1 w-full' id='description' type="text" placeholder='Description' /> <br /></div>
                         <div>
                             <label className='font-semibold text-accent pl-4' htmlFor="price">Price</label> <br />
-                            <input name='price' className='border border-accent rounded-2xl p-1 m-1 w-full' id='price' type="number" placeholder='Price' /> <br /></div>
+                            <input name='price' required className='border border-accent rounded-2xl p-1 m-1 w-full' id='price' type="number" placeholder='Price' /> <br /></div>
                         <div>
                             <label className='font-semibold text-accent pl-4' htmlFor="rating">Rating</label> <br />
                             <input name='rating' className='border border-accent rounded-2xl p-1 m-1 w-full' id='rating' type="text" placeholder='Rating' /> <br /></div>
@@ -99,7 +107,7 @@ const AddProduct = () => {
                             <label className='font-semibold text-accent pl-4' htmlFor="content">Product Content</label> <br />
                             <input name='content' className='border border-accent rounded-2xl p-1 m-1 w-full' id='content' type="text" placeholder='Product Content' /> <br /></div>
 
-                       
+
                     </div>
                     <button type='submit' className='text-center btn btn-primary rounded-3xl m-1 w-full'>Submit</button>
                 </form>

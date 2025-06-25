@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 import { useParams } from 'react-router-dom'; // should be 'react-router-dom'
+import Swal from 'sweetalert2';
 
 const CartPage = () => {
     const { serverApi } = useContext(AuthContext);
@@ -9,11 +10,24 @@ const CartPage = () => {
     const [loading, setLoading] = useState(true);
 
     const handleRemove = (id) => {
-        console.log("remove clicked", id)
-        fetch(`${serverApi}/carts/${id}`,{
-            method: "delete"
+        console.log("remove clicked", id);
+        fetch(`${serverApi}/carts/${id}`, {
+            method: "DELETE"
         })
-        
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    setCarts(prev => prev.filter(item => item._id !== id));
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Removed from cart',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+            .catch(err => console.error("Failed to delete item:", err));
+            
     };
     useEffect(() => {
         if (!email) return;
@@ -36,25 +50,32 @@ const CartPage = () => {
         <div className="p-6">
             <h1 className="text-xl font-bold mb-4">🛒 Cart Page</h1>
             <p><strong>Total items:</strong> {carts.length}</p>
-            <p><strong>User Email:</strong> {email}</p>
 
-            {/* Show items */}
-            <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-4">
-                {carts.map((item, idx) => (
-                    <div key={item._id || idx} className="p-4 border rounded-lg shadow">
-                        <img src={item.image} alt={item.name} className="w-full h-40 object-cover rounded" />
-                        <h2 className="text-lg font-semibold mt-2">{item.name}</h2>
 
-                        <p><strong>Brand:</strong> {item.brand}</p>
-                        <p><strong>Category:</strong> {item.category}</p>
-                        <p><strong>Buy Date:</strong> {new Date(item.buyDate).toLocaleDateString()}</p>
-                        <p><strong>Buy Quantity:</strong> {item.buyQuantity}</p>
-                        <button onClick={() => handleRemove(item._id)} className="mt-2 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">
-                            Remove
-                        </button>
-                    </div>
-                ))}
-            </div>
+            {carts.length === 0 ? (
+                <p className="text-center text-gray-500 mt-8 text-lg font-medium">
+                    ❌ No data found in your cart.
+                </p>
+
+            ) : (
+                <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-4">
+                    {carts.map((item, idx) => (
+                        <div key={item._id || idx} className="p-4 border rounded-lg shadow">
+                            <img src={item.image} alt={item.name} className="w-full h-40 object-cover rounded" />
+                            <h2 className="text-lg font-semibold mt-2">{item.name}</h2>
+
+                            <p><strong>Brand:</strong> {item.brand}</p>
+                            <p><strong>Category:</strong> {item.category}</p>
+                            <p><strong>Buy Date:</strong> {new Date(item.buyDate).toLocaleDateString()}</p>
+                            <p><strong>Buy Quantity:</strong> {item.buyQuantity}</p>
+                            <button onClick={() => handleRemove(item._id)} className="mt-2 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">
+                                Remove
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            )}
+
         </div>
     );
 };

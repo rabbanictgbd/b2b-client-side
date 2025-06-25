@@ -1,10 +1,11 @@
 import React, { Suspense, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AllProduct = () => {
-  const { serverApi , authUser} = useContext(AuthContext);
-  
+  const { serverApi, authUser } = useContext(AuthContext);
+
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
@@ -24,51 +25,57 @@ const AllProduct = () => {
 
   // Handle Cart button
   const handleAddToCart = (product) => {
-  if (!authUser || !authUser.email) {
-    alert("You must be logged in to add to cart.");
-    return;
-  }
+    if (!authUser || !authUser.email) {
+      alert("You must be logged in to add to cart.");
+      return;
+    }
 
-  const cartItem = {
-  productId: product._id,
-  name: product.name,
-  image: product.image,
-  category: product.category,
-  brand: product.brand,
-  price: product.price,
-  minSellQty: product.minSellQty,
-  quantity: product.quantity,
-  rating: product.rating,
-  description: product.description,
-  userEmail: authUser.email,
-  buyDate: new Date().toISOString(),
-  buyQuantity: product.minSellQty || 1,
-};
+    const cartItem = {
+      productId: product._id,
+      name: product.name,
+      image: product.image,
+      category: product.category,
+      brand: product.brand,
+      price: product.price,
+      minSellQty: product.minSellQty,
+      quantity: product.quantity,
+      rating: product.rating,
+      description: product.description,
+      userEmail: authUser.email,
+      buyDate: new Date().toISOString(),
+      buyQuantity: product.minSellQty || 1,
+    };
 
 
-  console.log('Cart Item:', cartItem);
+    console.log('Cart Item:', cartItem);
 
-  fetch(`${serverApi}/carts`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(cartItem),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("Server Response:", data);
-      if (data.insertedId || data.success) {
-        alert("✅ Added to cart successfully!");
-      } else {
-        alert("⚠️ Could not add to cart.");
-      }
+    fetch(`${serverApi}/carts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cartItem),
     })
-    .catch((err) => {
-      console.error("Add to cart error:", err);
-      alert("❌ Failed to add to cart.");
-    });
-};
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Server Response:", data);
+        if (data.insertedId || data.success) {
+          Swal.fire({
+                                  position: "top",
+                                  icon: "success",
+                                  title: "Added to cart successfully!",
+                                  showConfirmButton: false,
+                                  timer: 2000
+                              });
+        } else {
+          alert("⚠️ Could not add to cart.");
+        }
+      })
+      .catch((err) => {
+        console.error("Add to cart error:", err);
+        alert("❌ Failed to add to cart.");
+      });
+  };
 
 
   // Handle update button
@@ -79,8 +86,8 @@ const AllProduct = () => {
 
   // Handle delete button
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this product?");
-    if (!confirmDelete) return;
+    // const confirmDelete = window.confirm("Are you sure you want to delete this product?");
+    // if (!confirmDelete) return;
 
     try {
       const res = await fetch(`${serverApi}/products/${id}`, {
@@ -91,7 +98,7 @@ const AllProduct = () => {
       console.log(result);
 
       if (res.ok && result.deletedCount > 0) {
-        alert("Product deleted successfully!");
+        // alert("Product deleted successfully!");
         // Update the UI without the deleted product
         setProducts(prev => prev.filter(product => product._id !== id));
       } else {
@@ -132,11 +139,18 @@ const AllProduct = () => {
                   <td className="px-4 py-2 border text-center">{index + 1}</td>
                   <td className="px-4 py-2 border">{product.name}</td>
                   <td className="px-4 py-2 border">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-12 h-12 object-cover rounded"
-                    />
+                    {product.image ? (
+
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-12 h-12 object-cover rounded"
+                      />
+                    ) : (
+                      <div className="w-12 h-12 bg-gray-200 text-xs text-center flex items-center justify-center rounded">
+                        No Image
+                      </div>
+                    )}
                   </td>
                   <td className="px-4 py-2 border">{product.brand || 'N/A'}</td>
                   <td className="px-4 py-2 border">{product.category}</td>
@@ -163,12 +177,12 @@ const AllProduct = () => {
                     >
                       Update
                     </button>
-                    <button
+                    {/* <button
                       onClick={() => handleDelete(product._id)}
                       className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
                     >
                       Delete
-                    </button>
+                    </button> */}
                   </td>
                 </tr>
               ))}
