@@ -62,10 +62,19 @@ const CartPage = () => {
     if (loading) return <p className="text-center mt-4">Loading cart...</p>;
 
     return (
-        <MotionTest>
+        
         <div className="p-6">
+            
+             <motion.div
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      className="bg-green-200 text-center p-4 rounded-xl shadow-md "
+    >
             <h1 className="text-xl font-bold mb-4">🛒 Cart Page</h1>
             <p><strong>Total items:</strong> {carts.length}</p>
+    </motion.div>
+            
 
 
             {carts.length === 0 ? (
@@ -95,7 +104,7 @@ const CartPage = () => {
             )}
 
         </div>
-        </MotionTest>
+        
     );
 };
 
