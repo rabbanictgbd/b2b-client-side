@@ -11,7 +11,7 @@ const categories = [
 
 const productCategories = () => {
   return (
-    <div className="px-20">
+    <div className="bg-base-100 mx-20 my-5 p-10 rounded-lg">
       <h2 className="text-2xl font-bold mb-4">Product Categories</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {categories.map((cat, idx) => (

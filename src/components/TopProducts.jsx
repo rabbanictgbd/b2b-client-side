@@ -17,8 +17,8 @@ const TopProducts = () => {
       .catch(err => console.error('Error:', err));
   }, [serverApi]);
     return (
-        <div>
-            <div className="p-4">
+        <div className='bg-base-100 mx-20 my-5 p-10 rounded-lg'>
+            <div className="">
                 <h2 className="text-xl font-semibold mb-4">Top Products</h2>
 
                 <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
