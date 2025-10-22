@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 const MotionTest = () => {
   return (
-    <div className='mx-20'>
+    <div className='mx-20 my-5 '>
     <motion.div
       initial={{ opacity: 0, y: -550 }}
       animate={{ opacity: 1, y: 0 }}

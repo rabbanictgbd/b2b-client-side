@@ -10,7 +10,7 @@ const stats = [
 
 const CompanyOverview = () => {
   return (
-    <div className=" p-8">
+    <div className="bg-base-100 mx-20 rounded-lg p-8">
       <div className="max-w-5xl mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
