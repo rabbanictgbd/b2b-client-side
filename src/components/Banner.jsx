@@ -53,7 +53,8 @@ const Banner = () => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto mt-8">
+    <div className="bg-base-100 mx-20 rounded-lg">
+    <div className="w-full max-w-6xl mx-auto  mt-8">
       <Slider {...settings}>
         {eventSlides.map((event) => (
           <div key={event.id}>
@@ -77,6 +78,7 @@ const Banner = () => {
           </div>
         ))}
       </Slider>
+    </div>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 
 const MotionTest = () => {
   return (
+    <div className='mx-20'>
     <motion.div
       initial={{ opacity: 0, y: -550 }}
       animate={{ opacity: 1, y: 0 }}
@@ -10,6 +11,7 @@ const MotionTest = () => {
     >
       <h1 className="text-xl font-bold">B2B Wholesale Platform</h1>
     </motion.div>
+    </div>
   );
 };
 
