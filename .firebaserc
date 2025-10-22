@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "b11a11-client-side-rabbanictg"
-  }
+    "default": "b2b-client-side"
+  },
+  "targets": {},
+  "etags": {}
 }

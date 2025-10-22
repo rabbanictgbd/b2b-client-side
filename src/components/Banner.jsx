@@ -54,12 +54,12 @@ const Banner = () => {
 
   return (
     <div className="bg-base-100 mx-20 rounded-lg">
-    <div className="w-full max-w-6xl mx-auto  mt-8">
+    <div className="  mx-auto  ">
       <Slider {...settings}>
         {eventSlides.map((event) => (
           <div key={event.id}>
             <div
-              className="h-[500px] flex items-center justify-center text-white text-center bg-cover bg-center"
+              className=" w-full h-[500px] flex items-center justify-center text-white text-center bg-contain bg-no-repeat bg-center"
               style={{
                 backgroundImage: `url(${event.image})`,
               }}
