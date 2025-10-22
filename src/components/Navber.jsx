@@ -17,7 +17,17 @@ const Navber = () => {
         alert(error)
       });
   }
-
+ const linksNonUser = (
+    <>
+      <div className="flex gap-3">
+        <NavLink className={({ isActive }) => isActive ? 'font-bold text-white bg-accent border border-accent p-1 rounded-md' : 'font-bold text-secondary'} to='/'>Home</NavLink>
+        <NavLink className={({ isActive }) => isActive ? 'font-bold text-white bg-accent border border-accent p-1 rounded-md' : 'font-bold text-secondary'} to='/categories'>Categories</NavLink>
+        {/* {authUser && authUser.email &&(   */}
+        <NavLink className={({ isActive }) => isActive ? 'font-bold text-white bg-accent border border-accent p-1 rounded-md' : 'font-bold text-secondary'} to={`/carts/${authUser?.email}`} >Cart</NavLink>
+        {/* // )} */}
+      </div>
+    </>
+  )
   const links = (
     <>
       <div className="flex gap-3">
@@ -46,8 +56,8 @@ const Navber = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
 
-
-            {links}
+{authUser?(links): (linksNonUser)}
+           
 
 
           </ul>
