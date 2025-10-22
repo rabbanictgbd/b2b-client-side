@@ -4,6 +4,7 @@ import CategorySection from '../components/CategorySection';
 import MotionTest from '../components/MotionTest';
 import TopProducts from '../components/TopProducts';
 import CompanyOverview from '../components/CompanyOverview';
+import RecentProduct from '../components/RecentProduct';
 
 const Home = () => {
     return (
@@ -14,6 +15,9 @@ const Home = () => {
             </div>
             <div id='product-category'>
                 <CategorySection></CategorySection>
+            </div>
+            <div>
+                <RecentProduct></RecentProduct>
             </div>
             <div>
                 <TopProducts></TopProducts>

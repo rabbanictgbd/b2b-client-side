@@ -35,12 +35,12 @@ const Navber = () => {
 
   return (
     <div>
-      <div className="navbar bg-base-100 px-20 shadow-sm">
+      <div className="navbar bg-base-100 px-30 shadow-sm">
         <div className="navbar-start">
 
           {/* <img className='w-7' src={logo} alt="G Logo" /> */}
-          <Link className="text-xl font-bold text-primary" to='/'>
-            <MotionTest></MotionTest>
+          <Link className="text-xl  font-bold text-primary" to='/'>
+            <h1 className='shadow-sm bg-base-100 font-bold text-xl text-primary'>B2B Wholesale Platform</h1>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
